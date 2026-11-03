@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+  "@vitejs/plugin-react": "...",
+  "react": "...",
+  "react-dom": "...",
+  "react-router-dom": "...",
+  "tailwindcss": "..."
+}
+}

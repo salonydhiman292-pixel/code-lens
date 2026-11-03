@@ -1,0 +1,34 @@
+{
+  "name": "code-lens-backend",
+  "version": "1.0.0",
+  "description": "AI-Powered Software Change Intelligence Platform Backend",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node data/seed.js"
+  },
+  "keywords": [
+    "code-lens",
+    "code-quality",
+    "risk-prediction",
+    "security-analysis",
+    "explainable-ai",
+    "shap",
+    "gemini",
+    "google-api"
+  ],
+  "author": "Code Lens Team",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0"
+  }
+}
