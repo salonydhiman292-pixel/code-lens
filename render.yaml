@@ -11,6 +11,8 @@ services:
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
+      - key: NODE_VERSION
+        value: 20
       - key: PORT
         value: 5000
       - key: MONGODB_URI
@@ -28,11 +30,13 @@ services:
     runtime: static
     rootDir: FRONTEND/vite-project
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    staticPublishPath: FRONTEND/vite-project/dist
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
+      - key: NODE_VERSION
+        value: 20
       - key: VITE_API_BASE
         sync: false
