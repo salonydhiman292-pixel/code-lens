@@ -1,10 +1,18 @@
-const API_BASE = (import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/+$/, "");
+const API_BASE = (
+  import.meta.env.VITE_API_BASE ||
+  import.meta.env.VITE_API_URL ||
+  "https://code-lens-backend-9gsk.onrender.com/api"
+).replace(/\/+$/, "");
 
 async function request(endpoint, options = {}) {
   try {
+    const token = typeof localStorage !== "undefined" ? localStorage.getItem("code_lens_token") : null;
+    const authHeaders = token ? { Authorization: `Bearer ${token}` } : {};
+
     const res = await fetch(`${API_BASE}${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
+        ...authHeaders,
         ...options.headers,
       },
       ...options,
