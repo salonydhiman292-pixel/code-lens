@@ -401,10 +401,22 @@ function Security() {
                                 📍 {issue.file} {issue.line ? `:${issue.line}` : ""}
                               </span>
 
+                              {issue.cwe && (
+                                <span className="rounded-lg bg-rose-50 px-3 py-1.5 font-mono font-semibold text-rose-600">
+                                  {issue.cwe}
+                                </span>
+                              )}
+
                               <span className="rounded-lg bg-purple-50 px-3 py-1.5 font-semibold text-purple-600">
                                 {issue.category || "Security"}
                               </span>
                             </div>
+
+                            {issue.codeSnippet && (
+                              <div className="mt-3 max-w-2xl rounded-lg bg-slate-900 px-3 py-2 font-mono text-xs text-emerald-400 overflow-x-auto">
+                                <code>{issue.codeSnippet}</code>
+                              </div>
+                            )}
                           </div>
                         </div>
 

@@ -5,8 +5,10 @@ const vulnerabilitySchema = new mongoose.Schema({
   description: { type: String, default: "" },
   severity: { type: String, enum: ["Critical", "High", "Medium", "Low"], required: true },
   category: { type: String, required: true },
+  cwe: { type: String, default: "" },
   file: { type: String, required: true },
   line: { type: Number, default: 1 },
+  codeSnippet: { type: String, default: "" },
   remediation: { type: String, default: "" },
 });
 
