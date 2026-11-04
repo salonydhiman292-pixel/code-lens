@@ -26,7 +26,6 @@ services:
   - type: web
     name: code-lens-frontend
     runtime: static
-    plan: free
     rootDir: FRONTEND/vite-project
     buildCommand: npm install && npm run build
     staticPublishPath: dist
