@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 import { connectDB, getDBStatus } from "./config/db.js";
 
 // Routes
@@ -35,14 +38,29 @@ app.use("/api/technical-debt", debtRoutes);
 app.use("/api/assistant", assistantRoutes);
 
 // Direct PDF Download Endpoint
-app.get("/download-pdf", (req, res) => {
-  const pdfPath = "/Users/shivamdubey/Downloads/CODE-LENS/Code_Lens_Backend_Documentation.pdf";
-  res.download(pdfPath, "Code_Lens_Backend_Documentation.pdf");
-});
-app.get("/api/download-pdf", (req, res) => {
-  const pdfPath = "/Users/shivamdubey/Downloads/CODE-LENS/Code_Lens_Backend_Documentation.pdf";
-  res.download(pdfPath, "Code_Lens_Backend_Documentation.pdf");
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const handlePdfDownload = (req, res) => {
+  const localBackendPdf = path.join(__dirname, "Code_Lens_Backend_Documentation.pdf");
+  const rootPdf = path.resolve(__dirname, "../Code_Lens_Backend_Documentation.pdf");
+
+  let pdfPath = null;
+  if (fs.existsSync(localBackendPdf)) {
+    pdfPath = localBackendPdf;
+  } else if (fs.existsSync(rootPdf)) {
+    pdfPath = rootPdf;
+  }
+
+  if (pdfPath) {
+    res.download(pdfPath, "Code_Lens_Backend_Documentation.pdf");
+  } else {
+    res.status(404).json({ success: false, message: "Documentation PDF not found" });
+  }
+};
+
+app.get("/download-pdf", handlePdfDownload);
+app.get("/api/download-pdf", handlePdfDownload);
 
 // Root & Health Checks
 app.get("/", (req, res) => {
