@@ -30,7 +30,7 @@ services:
     runtime: static
     rootDir: FRONTEND/vite-project
     buildCommand: npm install && npm run build
-    staticPublishPath: FRONTEND/vite-project/dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
